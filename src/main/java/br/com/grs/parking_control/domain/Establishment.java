@@ -1,9 +1,6 @@
 package br.com.grs.parking_control.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +17,9 @@ public class Establishment {
 
     private String name;
     private String cnpj;
-    private String address;
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
     private String phone;
     private Long motorcycleSlotCount;
     private Long carSlotCount;
