@@ -16,6 +16,18 @@ public class VehicleMapper {
         return vehicle;
     }
 
+    public static VehicleDto.Response toDto(Vehicle vehicle) {
+        VehicleDto.Response vehicleDto = new VehicleDto.Response();
+        vehicleDto.setId(vehicle.getId());
+        vehicleDto.setBrand(vehicle.getBrand());
+        vehicleDto.setType(vehicle.getType());
+        vehicleDto.setColor(vehicle.getColor());
+        vehicleDto.setPlate(vehicle.getPlate());
+        vehicleDto.setModel(vehicle.getModel());
+
+        return vehicleDto;
+    }
+
     public static void updateEntityFromDto(VehicleDto.Request vehicleDto, Vehicle existingVehicle) {
         MapperUtils.updateIfNotNull(vehicleDto.getBrand(), existingVehicle::setBrand);
         MapperUtils.updateIfNotNull(vehicleDto.getModel(), existingVehicle::setModel);

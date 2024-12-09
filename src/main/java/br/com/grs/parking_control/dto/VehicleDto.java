@@ -18,4 +18,14 @@ public class VehicleDto {
         @NotBlank
         private VehicleType type;
     }
+
+    @Data
+    public static class Response {
+        private Long id;
+        private String brand;
+        private String model;
+        private String color;
+        private String plate;
+        private VehicleType type;
+    }
 }

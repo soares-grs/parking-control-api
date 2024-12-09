@@ -1,6 +1,5 @@
 package br.com.grs.parking_control.service;
 
-import br.com.grs.parking_control.domain.Establishment;
 import br.com.grs.parking_control.domain.Vehicle;
 import br.com.grs.parking_control.dto.VehicleDto;
 import br.com.grs.parking_control.repository.VehicleRepository;
@@ -15,30 +14,33 @@ public class VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public List<Vehicle> getAll() {
-        return this.vehicleRepository.findAllActive();
+    public List<VehicleDto.Response> getAll() {
+        return this.vehicleRepository.findAllActive()
+                .stream()
+                .map(VehicleMapper::toDto)
+                .toList();
     }
 
-    public Vehicle create(VehicleDto.Request vehicleDto) {
+    public VehicleDto.Response create(VehicleDto.Request vehicleDto) {
         Vehicle vehicle = VehicleMapper.toEntity(vehicleDto);
-        return this.vehicleRepository.save(vehicle);
+        return VehicleMapper.toDto(this.vehicleRepository.save(vehicle));
     }
 
-    public Vehicle update(Long vehicleId, VehicleDto.Request vehicleDto) {
+    public VehicleDto.Response update(Long vehicleId, VehicleDto.Request vehicleDto) {
         Vehicle existingVehicle = this.vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new RuntimeException("Do not exists any vehicle with this id."));
 
         VehicleMapper.updateEntityFromDto(vehicleDto, existingVehicle);
 
-        return this.vehicleRepository.save(existingVehicle);
+        return VehicleMapper.toDto(this.vehicleRepository.save(existingVehicle));
     }
 
-    public Vehicle delete(Long vehicleId) {
+    public VehicleDto.Response delete(Long vehicleId) {
         Vehicle vehicle = this.vehicleRepository
                 .findById(vehicleId).orElseThrow(() -> new RuntimeException("Do not exists any vehicle with this id."));
 
         vehicle.setActive(false);
 
-        return this.vehicleRepository.save(vehicle);
+        return VehicleMapper.toDto(this.vehicleRepository.save(vehicle));
     }
 }

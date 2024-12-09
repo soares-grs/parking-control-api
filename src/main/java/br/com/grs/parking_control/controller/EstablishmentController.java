@@ -19,13 +19,13 @@ public class EstablishmentController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Establishment> establishments = this.establishmentService.getAll();
+        List<EstablishmentDto.Response> establishments = this.establishmentService.getAll();
         return ResponseEntity.ok().body(establishments);
     }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody EstablishmentDto.Request establishmentDto) {
-        Establishment createdEstablishment = this.establishmentService.create(establishmentDto);
+        EstablishmentDto.Response createdEstablishment = this.establishmentService.create(establishmentDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEstablishment);
     }
@@ -33,7 +33,7 @@ public class EstablishmentController {
     @PutMapping("/{establishmentId}")
     public ResponseEntity<?> update(@RequestBody EstablishmentDto.Request establishmentDto, @PathVariable Long establishmentId) {
         try {
-            Establishment updatedEstablishment = this.establishmentService.update(establishmentId, establishmentDto);
+            EstablishmentDto.Response updatedEstablishment = this.establishmentService.update(establishmentId, establishmentDto);
             return ResponseEntity.ok().body(updatedEstablishment);
         } catch(Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

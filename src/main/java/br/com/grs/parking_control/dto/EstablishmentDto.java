@@ -1,5 +1,6 @@
 package br.com.grs.parking_control.dto;
 
+import br.com.grs.parking_control.domain.Address;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -26,12 +27,12 @@ public class EstablishmentDto {
 
     @Data
     public static class Response {
-        Long id;
-        String name;
-        String cnpj;
-        String address;
-        String phone;
-        Long motorcycleSlotCount;
-        Long carSlotCount;
+        private Long id;
+        private String name;
+        private String cnpj;
+        private Address address;
+        private String phone;
+        private Long motorcycleSlotCount;
+        private Long carSlotCount;
     }
 }

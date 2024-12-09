@@ -17,6 +17,19 @@ public class EstablishmentMapper {
         return establishment;
     }
 
+    public static EstablishmentDto.Response toDto(Establishment establishment) {
+        EstablishmentDto.Response establishmentDto = new EstablishmentDto.Response();
+        establishmentDto.setId(establishment.getId());
+        establishmentDto.setName(establishment.getName());
+        establishmentDto.setAddress(establishment.getAddress());
+        establishmentDto.setCnpj(establishment.getCnpj());
+        establishmentDto.setPhone(establishment.getPhone());
+        establishmentDto.setMotorcycleSlotCount(establishment.getMotorcycleSlotCount());
+        establishmentDto.setCarSlotCount(establishment.getCarSlotCount());
+
+        return establishmentDto;
+    }
+
     public static void updateEntityFromDto(Establishment existingEstablishment, EstablishmentDto.Request establishmentDto, Address address) {
         MapperUtils.updateIfNotNull(establishmentDto.getName(), existingEstablishment::setName);
         MapperUtils.updateIfNotNull(address, existingEstablishment::setAddress);
