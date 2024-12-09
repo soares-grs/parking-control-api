@@ -25,4 +25,11 @@ public class VehicleController {
         Vehicle createdVehicle = vehicleService.create(vehicleDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdVehicle);
     }
+
+    @PutMapping("/{vehicleId}")
+    public ResponseEntity<?> update(@PathVariable Long vehicleId, @RequestBody VehicleDto.Request vehicleDto) {
+        Vehicle updatedVehicle =  this.vehicleService.update(vehicleId, vehicleDto);
+
+        return ResponseEntity.ok().body(updatedVehicle);
+    }
 }

@@ -15,4 +15,12 @@ public class VehicleMapper {
 
         return vehicle;
     }
+
+    public static void updateEntityFromDto(VehicleDto.Request vehicleDto, Vehicle existingVehicle) {
+        MapperUtils.updateIfNotNull(vehicleDto.getBrand(), existingVehicle::setBrand);
+        MapperUtils.updateIfNotNull(vehicleDto.getModel(), existingVehicle::setModel);
+        MapperUtils.updateIfNotNull(vehicleDto.getColor(), existingVehicle::setColor);
+        MapperUtils.updateIfNotNull(vehicleDto.getType(), existingVehicle::setType);
+        MapperUtils.updateIfNotNull(vehicleDto.getPlate(), existingVehicle::setPlate);
+    }
 }

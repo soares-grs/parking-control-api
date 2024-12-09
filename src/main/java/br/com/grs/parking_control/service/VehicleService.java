@@ -22,4 +22,13 @@ public class VehicleService {
         Vehicle vehicle = VehicleMapper.toEntity(vehicleDto);
         return this.vehicleRepository.save(vehicle);
     }
+
+    public Vehicle update(Long vehicleId, VehicleDto.Request vehicleDto) {
+        Vehicle existingVehicle = this.vehicleRepository.findById(vehicleId)
+                .orElseThrow(() -> new RuntimeException("Do not exists any vehicle with this id."));
+
+        VehicleMapper.updateEntityFromDto(vehicleDto, existingVehicle);
+
+        return this.vehicleRepository.save(existingVehicle);
+    }
 }

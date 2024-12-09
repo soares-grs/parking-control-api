@@ -16,4 +16,13 @@ public class EstablishmentMapper {
 
         return establishment;
     }
+
+    public static void updateEntityFromDto(Establishment existingEstablishment, EstablishmentDto.Request establishmentDto, Address address) {
+        MapperUtils.updateIfNotNull(establishmentDto.getName(), existingEstablishment::setName);
+        MapperUtils.updateIfNotNull(address, existingEstablishment::setAddress);
+        MapperUtils.updateIfNotNull(establishmentDto.getCnpj(), existingEstablishment::setCnpj);
+        MapperUtils.updateIfNotNull(establishmentDto.getPhone(), existingEstablishment::setPhone);
+        MapperUtils.updateIfNotNull(establishmentDto.getMotorcycleSlotCount(), existingEstablishment::setMotorcycleSlotCount);
+        MapperUtils.updateIfNotNull(establishmentDto.getCarSlotCount(), existingEstablishment::setCarSlotCount);
+    }
 }

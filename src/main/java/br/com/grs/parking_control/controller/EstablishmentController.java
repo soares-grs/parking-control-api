@@ -30,4 +30,13 @@ public class EstablishmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEstablishment);
     }
 
+    @PutMapping("/{establishmentId}")
+    public ResponseEntity<?> update(@RequestBody EstablishmentDto.Request establishmentDto, @PathVariable Long establishmentId) {
+        try {
+            Establishment updatedEstablishment = establishmentService.update(establishmentId, establishmentDto);
+            return ResponseEntity.ok().body(updatedEstablishment);
+        } catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }

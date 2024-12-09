@@ -15,10 +15,16 @@ public class EstablishmentFacade {
     @Autowired
     private AddressService addressService;
 
+    public void processAddressOnEstablishmentUpdate(EstablishmentDto.Request establishmentDto, Address currentAddress) {
+        if(Objects.isNull(establishmentDto.getAddress())) return;
+
+        AddressMapper.updateAddressFromDto(currentAddress, establishmentDto.getAddress());
+    }
+
     private Address processAddressOnEstablishmentCreation(EstablishmentDto.Request establishmentDto) {
         Address address = addressService.findAddress(establishmentDto.getAddress());
 
-        if(Objects.isNull(address)) {
+        if (Objects.isNull(address)) {
             address = AddressMapper.toEntity(establishmentDto.getAddress());
             address = addressService.create(address);
         }

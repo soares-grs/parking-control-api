@@ -16,4 +16,15 @@ public class AddressMapper {
         address.setState(addressDto.getState());
         return address;
     }
+
+    public static void updateAddressFromDto(Address existingAddress, AddressDto.Request addressDto) {
+        MapperUtils.updateIfNotNull(addressDto.getStreet(), existingAddress::setStreet);
+        MapperUtils.updateIfNotNull(addressDto.getCity(), existingAddress::setCity);
+        MapperUtils.updateIfNotNull(addressDto.getState(), existingAddress::setState);
+        MapperUtils.updateIfNotNull(addressDto.getPostalCode(), existingAddress::setPostalCode);
+        MapperUtils.updateIfNotNull(addressDto.getNeighborhood(), existingAddress::setNeighborhood);
+        MapperUtils.updateIfNotNull(addressDto.getNumber(), existingAddress::setNumber);
+        MapperUtils.updateIfNotNull(addressDto.getComplement(), existingAddress::setComplement);
+        MapperUtils.updateIfNotNull(addressDto.getCountry(), existingAddress::setCountry);
+    }
 }
