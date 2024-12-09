@@ -17,12 +17,12 @@ public class VehicleController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok().body(vehicleService.getAll());
+        return ResponseEntity.ok().body(this.vehicleService.getAll());
     }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody VehicleDto.Request vehicleDto) {
-        Vehicle createdVehicle = vehicleService.create(vehicleDto);
+        Vehicle createdVehicle = this.vehicleService.create(vehicleDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdVehicle);
     }
 
@@ -31,5 +31,10 @@ public class VehicleController {
         Vehicle updatedVehicle =  this.vehicleService.update(vehicleId, vehicleDto);
 
         return ResponseEntity.ok().body(updatedVehicle);
+    }
+
+    @DeleteMapping("/{vehicleId}")
+    public ResponseEntity<?> delete(@PathVariable Long vehicleId) {
+        return ResponseEntity.ok().body(this.vehicleService.delete(vehicleId));
     }
 }

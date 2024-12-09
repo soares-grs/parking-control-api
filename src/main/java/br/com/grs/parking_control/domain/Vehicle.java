@@ -19,4 +19,6 @@ public class Vehicle {
     private String color;
     private String plate;
     private VehicleType type;
+
+    private boolean active = true;
 }

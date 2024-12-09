@@ -22,7 +22,7 @@ public class EstablishmentService {
     private EstablishmentRepository establishmentRepo;
 
     public List<Establishment> getAll() {
-        return this.establishmentRepo.findAll();
+        return this.establishmentRepo.findAllActive();
     }
 
     public Establishment create(EstablishmentDto.Request establishmentDto) {
@@ -38,5 +38,14 @@ public class EstablishmentService {
         EstablishmentMapper.updateEntityFromDto(existingEstablishment, establishmentDto, existingEstablishment.getAddress());
 
         return this.establishmentRepo.save(existingEstablishment);
+    }
+
+    public Establishment delete(Long establishmentId) {
+        Establishment establishment = this.establishmentRepo
+                .findById(establishmentId).orElseThrow(() -> new RuntimeException("Do not exists any establishment with this id."));
+
+        establishment.setActive(false);
+
+        return this.establishmentRepo.save(establishment);
     }
 }

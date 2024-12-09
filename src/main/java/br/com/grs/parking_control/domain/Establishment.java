@@ -23,4 +23,6 @@ public class Establishment {
     private String phone;
     private Long motorcycleSlotCount;
     private Long carSlotCount;
+
+    private boolean active = true;
 }
